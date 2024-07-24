@@ -3,31 +3,121 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+	--purple: #633cff;
+	--purple-hover: #beadff;
+	--light-purple: #efebff;
+	--dark-grey: #333;
+	--grey: #737373;
+	--borders: #d9d9d9;
+	--light-grey: #fafafa;
+	--white: #fff;
+	--red: #ff3939;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+	font-family: "Instrument Sans", sans-serif;
+	font-size: 16px;
+	line-height: 1.5;
+	color: var(--dark-grey);
+	background-color: var(--light-grey);
+	padding: 1.5rem;
+	transition: 0.2s all ease-in-out;
 }
 
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+	.heading-medium {
+		/* Heading M */
+		font-size: 2rem;
+		font-weight: 700;
+		line-height: 150%; /* 3rem */
+	}
+	.heading-small {
+		/* Heading S */
+		font-size: 1rem;
+		font-weight: 600;
+		line-height: 150%; /* 1.5rem */
+	}
+	.body-medium {
+		/* Body M */
+		font-size: 1rem;
+		font-weight: 400;
+		line-height: 150%; /* 1.5rem */
+	}
+	.body-small {
+		/* Body S */
+		font-size: 0.75rem;
+		font-weight: 400;
+		line-height: 150%; /* 1.125rem */
+	}
+}
+
+/* Button */
+.button-primary {
+	background-color: var(--purple);
+	color: var(--white);
+}
+.button-primary:hover,
+.button-primary:focus,
+.button-primary:active {
+	background-color: var(--purple-hover);
+	box-shadow: 0px 0px 32px 0px rgba(99, 60, 255, 0.25);
+}
+.button-secondary {
+	background-color: var(--white);
+	color: var(--purple);
+	border: 1px solid var(--purple);
+}
+.button-secondary:focus,
+.button-secondary:hover,
+.button-secondary:active {
+	background-color: var(--light-purple);
+}
+
+.tab-button {
+	@apply py-3 px-6 rounded-lg heading-small bg-transparent text-grey flex gap-1 items-center;
+}
+.tab-button:hover,
+.tab-button:focus,
+.tab-button:active {
+	@apply text-purple;
+}
+.tab-button:hover svg path,
+.tab-button:focus svg path,
+.tab-button:active svg path {
+	@apply fill-purple;
+}
+.tab-button.selected {
+	@apply bg-purpleLight text-purple;
+}
+
+/* Input */
+.form-group {
+	@apply flex flex-col gap-1;
+}
+.form-group label {
+	@apply body-small;
+}
+.form-group .input,
+.form-group input {
+	@apply py-3 px-4 rounded-lg body-medium;
+	outline: none;
+	background-color: var(--white);
+	border: 1px solid var(--borders);
+	caret-color: var(--purple);
+}
+.form-group:not(.has-error) .input:focus {
+	border: 1px solid var(--purple);
+	box-shadow: 0px 0px 32px 0px rgba(99, 60, 255, 0.25);
+	opacity: 1;
+}
+.form-group input::placeholder,
+input::placeholder {
+	opacity: 0.5;
+}
+
+.form-group.has-error .input {
+	border-color: var(--red);
+}
+.form-group.has-error label {
+	color: var(--red);
 }
